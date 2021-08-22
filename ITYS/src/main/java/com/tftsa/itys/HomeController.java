@@ -40,4 +40,29 @@ public class HomeController {
 	public String mainViewForward() {
 		return "common/main"; // 내보낼 뷰파일명 리턴
 	}
+	
+	@RequestMapping("about.do")
+	public String aboutViewForward() {
+		return "common/about"; // 내보낼 뷰파일명 리턴
+	}
+	
+	@RequestMapping("course.do")
+	public String courseViewForward() {
+		return "common/course"; // 내보낼 뷰파일명 리턴
+	}
+	
+	@RequestMapping("contact.do")
+	public String contactViewForward() {
+		return "common/contact"; // 내보낼 뷰파일명 리턴
+	}
+	
+	@RequestMapping("event.do")
+	public String eventViewForward() {
+		return "common/event"; // 내보낼 뷰파일명 리턴
+	}
+	
+	@RequestMapping("login.do")
+	public String loginViewForward() {
+		return "common/login"; // 내보낼 뷰파일명 리턴
+	}
 }

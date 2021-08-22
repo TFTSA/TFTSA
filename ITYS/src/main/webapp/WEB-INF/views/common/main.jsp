@@ -32,7 +32,7 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="main.jsp">
+          <a class="navbar-brand" href="main.do">
             <h3>
               Joson
             </h3>
@@ -45,22 +45,22 @@
           <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
             <ul class="navbar-nav  ml-auto">
               <li class="nav-item active">
-                <a class="nav-link" href="main.jsp">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="main.do">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="about.html"> About </a>
+                <a class="nav-link" href="about.do"> About </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="course.html"> Courses </a>
+                <a class="nav-link" href="course.do"> Courses </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="event.html"> Events </a>
+                <a class="nav-link" href="event.do"> Events </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact us</a>
+                <a class="nav-link" href="contact.do">Contact us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="login.html">Login</a>
+                <a class="nav-link" href="login.do">Login</a>
               </li>
             </ul>
             <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
@@ -563,22 +563,22 @@
             </h5>
             <ul class="navbar-nav  ">
               <li class="nav-item active">
-                <a class="nav-link" href="main.jsp">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="main.do">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="about.html"> About </a>
+                <a class="nav-link" href="about.do"> About </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="course.html"> Courses </a>
+                <a class="nav-link" href="course.do"> Courses </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="event.html"> Events </a>
+                <a class="nav-link" href="event.do"> Events </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact us</a>
+                <a class="nav-link" href="contact.do">Contact us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="login.html">Login</a>
+                <a class="nav-link" href="login.do">Login</a>
               </li>
             </ul>
           </div>
