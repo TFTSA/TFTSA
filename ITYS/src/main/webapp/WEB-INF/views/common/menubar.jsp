@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
@@ -41,25 +42,25 @@
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-
+		  
           <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
             <ul class="navbar-nav  ml-auto">
-              <li class="nav-item active">
+              <li class="nav-item <c:if test="${ pageContext.request.requestURI eq '/itys/WEB-INF/views/common/main.jsp' }">active</c:if>">
                 <a class="nav-link" href="main.do">Home <span class="sr-only">(current)</span></a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item <c:if test="${ pageContext.request.requestURI eq '/itys/WEB-INF/views/common/about.jsp' }">active</c:if>">
                 <a class="nav-link" href="about.do"> About </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item <c:if test="${ pageContext.request.requestURI eq '/itys/WEB-INF/views/common/course.jsp' }">active</c:if>">
                 <a class="nav-link" href="course.do"> Courses </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item <c:if test="${ pageContext.request.requestURI eq '/itys/WEB-INF/views/common/event.jsp' }">active</c:if>">
                 <a class="nav-link" href="event.do"> Events </a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item <c:if test="${ pageContext.request.requestURI eq '/itys/WEB-INF/views/common/contact.jsp' }">active</c:if>">
                 <a class="nav-link" href="contact.do">Contact us</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item <c:if test="${ pageContext.request.requestURI eq '/itys/WEB-INF/views/common/login.jsp' }">active</c:if>">
                 <a class="nav-link" href="login.do">Login</a>
               </li>
             </ul>

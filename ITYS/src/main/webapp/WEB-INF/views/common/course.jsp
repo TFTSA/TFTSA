@@ -13,7 +13,7 @@
 <body class="sub_page">
   <div class="hero_area">
     
-    <c:import url="/WEB-INF/views/common/menubar.jsp"></c:import>
+    <c:import url="/WEB-INF/views/common/menubar.jsp" />
     
   </div>
 
@@ -97,7 +97,7 @@
 
   <!-- end course section -->
 
-  <c:import url="/WEB-INF/views/common/footer.jsp"></c:import>
+  <c:import url="/WEB-INF/views/common/footer.jsp" />
 
 </body>
 
