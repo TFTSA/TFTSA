@@ -65,4 +65,11 @@ public class HomeController {
 	public String loginViewForward() {
 		return "common/login"; // 내보낼 뷰파일명 리턴
 	}
+	
+	@RequestMapping("detail.do")
+	public String detailViewForward() {
+		return "common/detail"; // 내보낼 뷰파일명 리턴
+	}
 }
+
+
