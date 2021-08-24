@@ -60,8 +60,11 @@
               <li class="nav-item <c:if test="${ pageContext.request.requestURI eq '/itys/WEB-INF/views/common/contact.jsp' }">active</c:if>">
                 <a class="nav-link" href="contact.do">Contact us</a>
               </li>
-              <li class="nav-item <c:if test="${ pageContext.request.requestURI eq '/itys/WEB-INF/views/common/login.jsp' }">active</c:if>">
+             <li class="nav-item <c:if test="${ pageContext.request.requestURI eq '/itys/WEB-INF/views/common/detail.jsp' }">active</c:if>">
                 <a class="nav-link" href="login.do">Login</a>
+              </li>
+               <li class="nav-item <c:if test="${ pageContext.request.requestURI eq '/itys/WEB-INF/views/common/detail.jsp' }">active</c:if>">
+                <a class="nav-link" href="detail.do">상세보기</a><!-- 잠깐 상세보기에 올렷어요 나중에 이 바에서 지울게요 -->
               </li>
             </ul>
             <form class="form-inline my-2 my-lg-0 ml-0 ml-lg-4 mb-3 mb-lg-0">
