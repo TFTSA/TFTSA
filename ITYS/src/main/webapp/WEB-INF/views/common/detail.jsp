@@ -245,7 +245,78 @@
               
              </section>
              
+              <Br><Br>
+            
+		 <section class="pic_video" style="width:960px; height:200px; margin:0px; padding:0px">
+        	
+        	     <form>
+              <h5>사진</h5>
+              <Br>
+              <table class="intro" style="width:960px;height:50px; margin:0px; padding:0px;">
+               	<tr><td>내용</td></tr>
+              </table>
+               <hr>
+               <br>
+               
+              
+              </form>
+              
+             </section>
              
+              <section class="dreview" style="width:960px; height:1800px; margin:0px; padding:0px">
+        	
+        	
+             <div class="reviews">
+             <h5>리뷰</h5>
+                <ul class="star1">
+                
+                	<li class="stars"><img src="${ pageContext.servletContext.contextPath }/resources/images/star.png" class="emptystar"></li>
+                	<li class="stars"><img src="${ pageContext.servletContext.contextPath }/resources/images/star.png" class="emptystar"></li>
+                	<li class="stars"><img src="${ pageContext.servletContext.contextPath }/resources/images/star.png" class="emptystar"></li>
+                	<li class="stars"><img src="${ pageContext.servletContext.contextPath }/resources/images/star.png" class="emptystar"></li>
+                	<li class="stars"><img src="${ pageContext.servletContext.contextPath }/resources/iimages/star.png" class="emptystar"></li>
+                	  &nbsp;  <span class="point" style="font-size:18px"> 0.0</span>
+                	  <span calss="reviewcount" style="font-size:13px;">(갯수)</span>
+                	 
+                </ul>
+                
+            
+             </div>
+             
+        	     
+              <div class="">
+              <Br><Br>
+              <ul style="list-style:none; marign:0px;padding:0px; margin-right:10px;">
+              		<li class="">
+              			<table class="intro" style="width:990px;height:50px; margin:0px; padding:0px;" >
+              			  <tr><td>이름</td></tr>
+              			  <tr><td>작성날짜</td></tr>
+              			  <tr><td> 
+              			  <ul class="star1">
+                	<li class="stars"><img src="${ pageContext.servletContext.contextPath }/resources/iimages/star.png" class="emptystar"></li>
+                	<li class="stars"><img src="${ pageContext.servletContext.contextPath }/resources/iimages/star.png" class="emptystar"></li>
+                	<li class="stars"><img src="${ pageContext.servletContext.contextPath }/resources/iimages/star.png" class="emptystar"></li>
+                	<li class="stars"><img src="${ pageContext.servletContext.contextPath }/resources/iimages/star.png" class="emptystar"></li>
+                	<li class="stars"><img src="${ pageContext.servletContext.contextPath }/resources/iimages/star.png" class="emptystar"></li>
+                	  &nbsp;  <span class="point" style="font-size:18px"> 0.0</span>
+                	 </ul>
+                	 <br>
+                		<tr><td>내용</td></tr>
+                		
+                			
+              			</table>
+              		</li>
+               </ul>
+               <button style="margin:0;width:80px;height:30px;margin-left:525px; border: none;border-radius:10px;text-decoration: none;background-color:#fff; color:#20c997; font-size:15px;">더보기</button>	
+              </div>
+               <hr>
+               <br>
+               <button style="margin:0;width:150px;height:50px;margin-left:40%; border: none;border-radius:20px;text-decoration: none;background-color:#20c997; color:white">리뷰 더보기</button>
+              
+              
+            
+              
+             </section>
              
             </div>
           </div>
