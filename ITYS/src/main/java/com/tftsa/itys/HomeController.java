@@ -66,9 +66,36 @@ public class HomeController {
 		return "common/login"; // 내보낼 뷰파일명 리턴
 	}
 	
-	@RequestMapping("detail.do")
-	public String detailViewForward() {
-		return "common/detail"; // 내보낼 뷰파일명 리턴
+
+	@RequestMapping("adminDashboard.do")
+	public String AdminDashViewForward() {
+		return "admin/adminDashboard"; // 내보낼 뷰파일명 리턴
+	}
+	
+	@RequestMapping("adminMember.do")
+	public String AdminMemberViewForward() {
+		return "admin/adminMember"; // 내보낼 뷰파일명 리턴
+	}
+	
+	@RequestMapping("adminReview.do")
+	public String AdminReviewViewForward() {
+		return "admin/adminReview"; // 내보낼 뷰파일명 리턴
+	}
+	
+	@RequestMapping("adminDeposit.do")
+	public String AdminDepositViewForward() {
+		return "admin/adminDeposit"; // 내보낼 뷰파일명 리턴
+	}
+	
+	@RequestMapping("adminChatting.do")
+	public String AdminChattingViewForward() {
+		return "admin/adminChatting"; // 내보낼 뷰파일명 리턴
+	}
+	
+	@RequestMapping("adminCategory.do")
+	public String AdminCategoryViewForward() {
+		return "admin/adminCategory"; // 내보낼 뷰파일명 리턴
+
 	}
 }
 
