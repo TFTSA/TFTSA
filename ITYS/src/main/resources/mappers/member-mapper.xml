@@ -20,6 +20,16 @@
 		select * from user_info 
 		where user_id = #{ user_id }
 	</select>
+	
+	<select id="selectEmail" parameterType="string" resultMap="resultMember">
+		select * from user_info
+		where user_email = #{user_email}
+	</select>
+	
+	<select id="selectUserNo" parameterType="_int" resultMap="resultMember">
+		select * from user_info
+		where user_no = #{user_no}
+	</select>
 
 	<insert id="insertUser" parameterType="Member">
 		insert into user_info (user_no, user_ssn, user_name, user_phone, user_id, user_pwd, user_email, user_position, login_ok)
@@ -27,8 +37,8 @@
 		(user_seq.nextval, #{user_ssn}, #{user_name}, #{user_phone}, #{user_id}, #{user_pwd}, #{user_email}, 'U', default)
 	</insert>
 	
-	<delete id="deleteUser" parameterType="string">
-		delete from user_info where user_id = #{ user_id }
+	<delete id="deleteUser" parameterType="_int">
+		delete from user_info where user_no = #{ user_no }
 	</delete>
 	
 	<select id="selectIdCheck" parameterType="string" resultType="_int">

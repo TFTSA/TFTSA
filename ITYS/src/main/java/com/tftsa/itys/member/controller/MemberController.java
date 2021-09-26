@@ -1,11 +1,15 @@
 package com.tftsa.itys.member.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,76 +52,88 @@ public class MemberController {
   
   //네이버 로그인 성공시 callback호출 메소드
     @RequestMapping(value = "callback.do", method = { RequestMethod.GET, RequestMethod.POST })
-    public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
+    public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session, HttpServletResponse response, SessionStatus status)
             throws IOException, ParseException {
-        logger.info("callback.do");
+        System.out.println("===== callback.do =====");
         OAuth2AccessToken oauthToken;
         logger.info("session : "+session);
         logger.info("code : "+code);
         logger.info("state : "+state);
         oauthToken = naverLoginBO.getAccessToken(session, code, state);
+        logger.info("oauthToken : "+oauthToken);
         //로그인 사용자 정보를 읽어온다.
         apiResult = naverLoginBO.getUserProfile(oauthToken);
         logger.info(apiResult.toString());
         model.addAttribute("result", apiResult);
-        System.out.println("result"+apiResult);
-        /* 네이버 로그인 성공 페이지 View 호출 */
-//      JSONObject jsonobj = jsonparse.stringToJson(apiResult, "response");
-//      String snsId = jsonparse.JsonToString(jsonobj, "id");
-//
-// 
-//      String name = jsonparse.JsonToString(jsonobj, "name");
-//
-//      UserVO vo = new UserVO();
-//      vo.setUser_snsId(snsId);
-//      vo.setUser_name(name);
-//
-//      System.out.println(name);
-//      try {
-//          vo = service.naverLogin(vo);
-//      } catch (Exception e) {
-//          // TODO Auto-generated catch block
-//          e.printStackTrace();
-//      }
-//
-//      session.setAttribute("login",vo);
-//      return new ModelAndView("user/loginPost", "result", vo);
+        logger.info("result : "+apiResult);
         
-//        JSONParser parser = new JSONParser();
-//        Object obj = parser.parse(apiResult);
-//        JSONObject jsonObj = (JSONObject) obj;
-//        //3. 데이터 파싱
-//        //Top레벨 단계 _response 파싱
-//        JSONObject response_obj = (JSONObject)jsonObj.get("response");
-//        //response의 nickname값 파싱
-//        String nickname = (String)response_obj.get("nickname");
-//        System.out.println(nickname);
-//        //4.파싱 닉네임 세션으로 저장
-//        session.setAttribute("sessionId",nickname); //세션 생성
-//        model.addAttribute("result", apiResult);
-        
-//        ObjectMapper objectMapper =new ObjectMapper();
-//		Map<String, Object> apiJson = (Map<String, Object>) objectMapper.readValue(apiResult, Map.class).get("response");
-//		
-//		Map<String, Object> naverConnectionCheck = memberService.naverConnectionCheck(apiJson);
-//		
-//		if(naverConnectionCheck == null) { //일치하는 이메일 없으면 가입
-//			
-//			model.addAttribute("email",apiJson.get("email"));
-//			model.addAttribute("password",apiJson.get("id"));
-//			model.addAttribute("phone",apiJson.get("mobile"));
-//			return "user/setNickname";
-//		}else if(naverConnectionCheck.get("NAVERLOGIN") == null && naverConnectionCheck.get("EMAIL") != null) { //이메일 가입 되어있고 네이버 연동 안되어 있을시
-//			userservice.setNaverConnection(apiJson);
-//			Map<String, Object> loginCheck = userservice.userNaverLoginPro(apiJson);
-//			session.setAttribute("userInfo", loginCheck);
-//		}else { //모두 연동 되어있을시
-//			Map<String, Object> loginCheck = userservice.userNaverLoginPro(apiJson);
-//			session.setAttribute("userInfo", loginCheck);
-//		}
+        JSONParser parser = new JSONParser();
+        Object obj = parser.parse(apiResult);
+        JSONObject jsonObj = (JSONObject) obj;
 
-		return "redirect:main.do";
-        
+        //Top레벨 단계 _response 파싱
+        JSONObject response_obj = (JSONObject)jsonObj.get("response");
+        //response의 값 파싱
+        String id = (String)response_obj.get("id");
+        String name = (String)response_obj.get("name");
+        String email = (String)response_obj.get("email");
+        String gender = (String)response_obj.get("gender");
+        String birthday = (String)response_obj.get("birthday");
+        String birthyear = (String)response_obj.get("birthyear");
+        String mobile = (String)response_obj.get("mobile");
+
+        System.out.println(id);
+        session.setAttribute("sessionId",id); //세션 생성        
+
+        Member loginMember = memberService.selectEmail(email);
+        logger.info("callback.do loginMember : "+loginMember);
+        if(loginMember != null && loginMember.getLogin_ok().equals("Y")) {
+        	//회원가입이 되어있음
+        	session.setAttribute("loginMember", loginMember);
+			status.setComplete(); // 요청 성공. 200 전송보냄
+			return "redirect:main.do";
+        }else if(loginMember == null){
+        	//회원가입 안되어있음
+	        Member member = new Member();
+	        
+	        member.setUser_name(name);
+	        member.setUser_email(email);
+	        member.setUser_phone(mobile);
+	        member.setUser_position("U");
+	        String ssn = "";
+	        String ran = "";
+	        Random rand = new Random();
+	        for(int i=0;i<6;i++) {
+	            //0~9 까지 난수 생성
+	            ran += Integer.toString(rand.nextInt(10));
+	        }
+	        ssn += birthyear.substring(2, 4) + birthday.substring(0,2) + birthday.substring(3, 5) + "-" + (gender.equals("M")? "1" : "2" + ran);
+	        //System.out.println("ssn : "+ssn);
+	        member.setUser_ssn(ssn);
+	        
+	        if (memberService.insertUser(member) > 0) {
+			//Member loginMember = memberService.selectUser(member.getUser_id());
+	        member = memberService.selectEmail(email);
+	        System.out.println("member : "+member.toString());
+	        session.setAttribute("loginMember", member);
+			status.setComplete(); // 요청 성공. 200 전송보냄
+//			PrintWriter out = response.getWriter();
+//			String str = "";
+//			str = "<script language='javascript'>";
+//			str += "opener.window.location.reload();"; // 오프너 새로고침
+//			str += "window.close();"; // 창닫기
+//			str += "</script>";
+//			out.print(str);
+	        
+	        return "redirect:main.do";        
+	        }else {
+	        	model.addAttribute("message", "회원가입 및 로그인 실패..");
+	        	return "common/error";
+	        }
+        }else {
+			model.addAttribute("message", "로그인 실패...");
+			return "common/error";
+		}
 //        return "common/main";
     }
     
@@ -169,14 +185,14 @@ public class MemberController {
 		// 조회해 온 회원정보의 암호화된 패스워드와 클라이언트가 보낸 암호 비교
 		// matches(일반글자 암호, 암호화된 패스워드)
 		
-		logger.info("login.do : " + member);
+		logger.info("login.do : " + loginMember);
 
 		if (loginMember != null && bcryptPasswordEncoder.matches(member.getUser_pwd(), loginMember.getUser_pwd())
 				&& loginMember.getLogin_ok().equals("Y")) {
 			// 세션 객체 생성 > 세션 안에 회원정보 저장
 			session.setAttribute("loginMember", loginMember);
 			status.setComplete(); // 요청 성공. 200 전송보냄
-			return "common/main";
+			return "redirect:main.do";
 		} else {
 			model.addAttribute("message", "로그인 실패!");
 			return "common/error";
@@ -199,8 +215,8 @@ public class MemberController {
 
 	// 마이페이지로 이동
 	@RequestMapping(value = "myPage.do")
-	public ModelAndView myPageMethod(@RequestParam("user_id") String user_id, ModelAndView mv) {
-		Member member = memberService.selectUser(user_id);
+	public ModelAndView myPageMethod(@RequestParam("user_no") int user_no, ModelAndView mv) {
+		Member member = memberService.selectUserNo(user_no);
 		if (member != null) {
 			mv.addObject("member", member);
 			if(member.getUser_position().equals("S")) {
@@ -212,7 +228,7 @@ public class MemberController {
 			}
 			mv.setViewName("mypage/myPage");
 		} else {
-			mv.addObject("message", user_id + " 회원 조회 실패!");
+			mv.addObject("message", user_no + " 회원 조회 실패!");
 			mv.setViewName("common/error");
 		}
 		return mv;
@@ -220,12 +236,12 @@ public class MemberController {
 
 	// 회원탈퇴
 	@RequestMapping("deleteUser.do")
-	public String deleteUserMethod(@RequestParam("user_id") String user_id, Model model) {
-		logger.info("user_id : " + user_id);
-		if (memberService.deleteUser(user_id) > 0) {
+	public String deleteUserMethod(@RequestParam("user_no") int user_no, Model model) {
+		logger.info("user_no : " + user_no);
+		if (memberService.deleteUser(user_no) > 0) {
 			return "redirect:logout.do";
 		} else {
-			model.addAttribute("message", user_id + " 회원 삭제 실패");
+			model.addAttribute("message", user_no + " 회원 삭제 실패");
 			return "common/error";
 		}
 	}

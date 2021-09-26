@@ -8,7 +8,7 @@ import com.tftsa.itys.mypage.model.vo.Tutor;
 
 public interface MemberService {
 	int insertUser(Member member);
-	int deleteUser(String user_id);
+	int deleteUser(int user_no);
 	Member selectUser(String user_id);
 	int selectIdCheck(String user_id);
 	int selectEmailCheck(String user_email);
@@ -18,4 +18,6 @@ public interface MemberService {
 	int updateUserPwd(Member member);
 	Student selectStudent(int user_no);
 	Tutor selectTutor(int user_no);
+	Member selectEmail(String email);
+	Member selectUserNo(int user_no);
 }

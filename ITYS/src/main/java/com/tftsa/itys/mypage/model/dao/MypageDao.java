@@ -124,4 +124,8 @@ public class MypageDao {
 	public int deleteKeyData(int user_no) {
 		return session.delete("mypageMapper.deleteKeyData", user_no);
 	}
+
+	public int deleteChattingRoom(int chat_room_no) {
+		return session.delete("mypageMapper.deleteChattingRoom", chat_room_no);
+	}
 }

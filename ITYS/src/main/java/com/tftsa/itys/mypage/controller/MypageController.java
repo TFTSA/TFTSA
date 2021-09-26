@@ -295,6 +295,24 @@ public class MypageController {
 		return "redirect:selectChattingList.do?user_no=" + user_no;
 	}
 	
+	// 채팅 목록 삭제
+	@RequestMapping(value="delclist.do", method=RequestMethod.POST)
+	public String deleteChattingList(@RequestParam("chk") String checkedList, @RequestParam("user_no") int user_no) {
+		logger.info("delclist.do : "+checkedList);
+		logger.info("user_no : "+user_no);
+		
+		String[] array = checkedList.split(",");
+	    for(int i=0 ;i<array.length; i++) {
+	    	logger.info(array[i]);
+	    	
+	    	if(mypageService.deleteChattingRoom(Integer.parseInt(array[i]))>0) {
+	    		logger.info("delclist.do delete["+i+"] : "+array[i]);
+	    	}
+	    }
+		
+		return "redirect:cishl.do?user_no="+user_no;
+	}
+	
 	// 내 수업 목록 조회
 	@RequestMapping("mclass.do")
 	public String moveMyClass(@RequestParam("user_no") int user_no, Model model) {

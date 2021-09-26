@@ -145,5 +145,10 @@ public class MypageServiceImpl implements MypageService{
 	public int deleteKeyData(int user_no) {
 		return mypageDao.deleteKeyData(user_no);
 	}
+
+	@Override
+	public int deleteChattingRoom(int chat_room_no) {
+		return mypageDao.deleteChattingRoom(chat_room_no);
+	}
 	
 }

@@ -35,6 +35,7 @@ div#right{
 	flex: 1.4;
 	padding: 10px 0;
 	padding-left: 50px;
+	padding-right: 20px;
 	align-items: baseline !important;
 }
 ul{
@@ -64,6 +65,14 @@ ul#bar li a{
 	text-align:center;
 	margin:0;
 	color: #343a40;
+}
+.delbutton{
+	display: inline-block;
+    padding: 8px 45px;
+    background-color: #133e3f;
+    border: 1px solid #133e3f;
+    color: #ffffff;
+    margin-top: 35px;
 }
 ul#bar li a:hover{
 	width:120px;
@@ -122,7 +131,7 @@ img{
 						</div>
 						<div style="padding-top: 5px;">
 							<ul id="bar">
-								<li><a href="myPage.do?user_id=${loginMember.user_id }">프로필</a></li>
+								<li><a href="myPage.do?user_no=${loginMember.user_no }">프로필</a></li>
 								<c:if test="${position eq 'S' }">
 								<li><a href="clist.do?user_no=${student.user_no }" style="color:white; background: #42acae; border-radius:3px;">채팅목록</a></li>
 								<li><a href="wishl.do?user_no=${student.user_no }">찜 목록</a></li>
@@ -137,16 +146,23 @@ img{
 					</div>
 					<div id="right">
 						<div>
-						
-							<h4>채팅 목록</h4>
+							<h4>💬 채팅 목록</h4>
 						</div><br>
+						<form action="delclist.do" method="post">
+						<input type="hidden" name="user_no" value="${loginMember.user_no }">
 						<div>
+						
 							<ul id="wlist">
 								<li>
 								<c:if test="${ requestScope.userchattingroomtutor != null }">
 								<c:forEach items="${ requestScope.userchattingroomtutor }" var="ucrt">
 								<table>
 									<tr>
+									<td valign="top">
+										<img
+										src="${ pageContext.servletContext.contextPath }/resources/images/member/profileDefault.gif"
+										width="75px" height="75px" style="margin-top:5px" />
+									</td>
 									<td style="width:475px; padding-left:15px; cursor: pointer;" onclick="location.href='selectChatting.do?chat_room_no=${ ucrt.chat_room_no }'">
 										선생님이름 : ${ ucrt.tutor_name }<br>	
 										과외 한 줄 소개 : ${ ucrt.intro }<br>
@@ -154,7 +170,7 @@ img{
 										과목 : ${ ucrt.sub_name }<br>
 										지역 : ${ ucrt.area }<Br>
 									</td>
-									<td style="align: right;"><input type="checkbox"></td>
+									<td style="align: right;"><input type="checkbox" name="chk" value="${ucrt.chat_room_no }"></td>
 									</tr>
 								</table><hr>
 								</c:forEach>
@@ -170,7 +186,7 @@ img{
 										과외 가능 시간 : ${ ucrt.time }<br>
 										바라는 점 : ${ ucrt.stu_wish }<Br>
 									</td>
-									<td style="align: right;"><input type="checkbox"></td>
+									<td style="align: right;"><input type="checkbox" name="chk" value="${ucrt.chat_room_no }"></td>
 									</tr>
 								</table><hr>
 								</c:forEach>
@@ -183,10 +199,12 @@ img{
 								</li>
 								
 							</ul>
+							
 						</div>
 						<div class="btn-box" align="center">
-							<a href="">삭제하기</a>
+							<input type="submit" class="delbutton" value="삭제하기">
 						</div>
+						</form>
 					</div>
 				</div>
 				

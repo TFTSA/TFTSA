@@ -87,7 +87,7 @@
             </form>
             <c:if test="${!empty loginMember and loginMember.login_ok eq 'Y'}">
 	            <c:url var="callMypage" value="myPage.do">
-	            	<c:param name="user_id" value="${loginMember.user_id }"/>
+	            	<c:param name="user_no" value="${loginMember.user_no }"/>
 	            </c:url>
 	            <br><a href="${callMypage }">마이페이지</a>
 	            <br><a href="logout.do">로그아웃</a>

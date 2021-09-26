@@ -123,7 +123,7 @@ img{
 						</div>
 						<div style="padding-top: 5px;">
 							<ul id="bar">
-								<li><a href="myPage.do?user_id=${loginMember.user_id }">프로필</a></li>
+								<li><a href="myPage.do?user_no=${loginMember.user_no }">프로필</a></li>
 								<c:if test="${position eq 'S' }">
 								<li><a href="clist.do?user_no=${loginMember.user_no }">채팅목록</a></li>
 								<li><a href="wishl.do?user_no=${loginMember.user_no }">찜 목록</a></li>

@@ -62,8 +62,8 @@
               <li class="nav-item <c:if test="${ pageContext.request.requestURI eq '/itys/WEB-INF/views/common/info.jsp' }">active</c:if>">
                 <a class="nav-link" href="info.do"> 고객센터 </a>
               </li>
-              <li class="nav-item <c:if test="${ pageContext.request.requestURI eq '/itys/WEB-INF/views/common/contact.jsp' }">active</c:if>">
-                <a class="nav-link" href="contact.do">회원가입</a>
+              <li class="nav-item <c:if test="${ pageContext.request.requestURI eq '/itys/WEB-INF/views/member/enrollPage.jsp' }">active</c:if>">
+                <a class="nav-link" href="enrollPage.do">회원가입</a>
               </li>
               <li class="nav-item <c:if test="${ pageContext.request.requestURI eq '/itys/WEB-INF/views/member/loginPage.jsp' }">active</c:if>">
                 <a class="nav-link" href="loginPage.do">로그인</a>
@@ -91,7 +91,7 @@
                 <a class="nav-link" href="info.do"> 고객센터 </a>
               </li>
               <li class="nav-item <c:if test="${ pageContext.request.requestURI eq '/itys/WEB-INF/views/common/contact.jsp' }">active</c:if>">
-                <a class="nav-link" href="">관리자 페이지</a>
+                <a class="nav-link" href="admin.do">관리자 페이지</a>
               </li>
               <li class="nav-item "><c:if test="${ pageContext.request.requestURI eq '/itys/WEB-INF/views/member/loginPage.jsp' }">active</c:if>
                 <a class="nav-link" href="logout.do">로그아웃</a>
@@ -119,7 +119,7 @@
               </li>
               
               <li class="nav-item <c:if test="${ pageContext.request.requestURI eq '/itys/WEB-INF/views/mypage/myPage.jsp' }">active</c:if>">
-                <a class="nav-link" href="myPage.do?user_id=${loginMember.user_id }">마이페이지</a>
+                <a class="nav-link" href="myPage.do?user_no=${loginMember.user_no }">마이페이지</a>
               </li>
               <li class="nav-item "><%-- <c:if test="${ pageContext.request.requestURI eq '/itys/WEB-INF/views/member/loginPage.jsp' }">active</c:if> --%>
                 <a class="nav-link" href="logout.do">로그아웃</a>

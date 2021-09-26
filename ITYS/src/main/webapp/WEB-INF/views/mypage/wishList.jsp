@@ -35,6 +35,7 @@ div#right{
 	flex: 1.4;
 	padding: 10px 0;
 	padding-left: 50px;
+	padding-right: 20px;
 	align-items: baseline !important;
 }
 ul{
@@ -138,7 +139,7 @@ img{
 						</div>
 						<div style="padding-top: 5px;">
 							<ul id="bar">
-								<li><a href="myPage.do?user_id=${loginMember.user_id }">프로필</a></li>
+								<li><a href="myPage.do?user_no=${loginMember.user_no }">프로필</a></li>
 								<li><a href="clist.do?user_no=${loginMember.user_no }">채팅목록</a></li>
 								<li><a href="wishl.do?user_no=${loginMember.user_no }" style="color:white; background: #42acae; border-radius:3px;">찜 목록</a></li>
 								<li><a href="mclass.do?user_no=${loginMember.user_no }">내 강의 내역</a></li>
