@@ -122,6 +122,14 @@
 		<result property="sub_name" column="sub_name"/>
 	</resultMap>
 	
+	<resultMap type="Chattingroom" id="resultChattingroom">
+		<id column="chat_room_no" property="chat_room_no" />
+		<result column="student_no" property="student_no" />
+		<result column="tutor_no" property="tutor_no" />
+		<result column="student_name" property="student_name" />
+		<result column="tutor_name" property="tutor_name" />
+	</resultMap>
+	
 	<resultMap type="MyKeyword" id="resultKeyword">
 		<id column="key_no" property="key_no" />
 		<result column="type_per" property="type_per" />
@@ -167,7 +175,7 @@
 		select * from payment p, user_info u, tutor t
 		where p.tutor_name = u.user_name and u.user_no = t.user_no
 		and p.student_name = (select user_name from user_info where user_no = ${user_no})
-		and pay_status = 'Y'
+		and pay_status = 'COMPLETE'
 		order by pay_no
 	</select>
 	
@@ -277,6 +285,11 @@
 		where tutor_no = #{ user_no }
 		group by user_no, chat_room_no, student_no, tutor_no, student_name, tutor_name, user_ssn, user_name, user_phone, user_id, user_pwd, user_email, user_position, login_ok, pic, stu_job, day, time, stu_wish
 	</select>
+	
+	<delete id="deleteChattingRoom">
+		delete chatting_room where chat_room_no = #{chat_room_no}
+	</delete>
+	
 </mapper>
 
 

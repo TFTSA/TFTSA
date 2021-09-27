@@ -17,8 +17,8 @@ public class MemberDao {
 		return session.insert("memberMapper.insertUser", member);
 	}
 	
-	public int deleteUser(String user_id) {
-		return session.delete("memberMapper.deleteUser", user_id);
+	public int deleteUser(int user_no) {
+		return session.delete("memberMapper.deleteUser", user_no);
 	}
 	
 	public Member selectUser(String user_id) {
@@ -47,6 +47,14 @@ public class MemberDao {
 
 	public Tutor selectTutor(int user_no) {
 		return session.selectOne("mypageMapper.selectTutor", user_no);
+	}
+
+	public Member selectEmail(String email) {
+		return session.selectOne("memberMapper.selectEmail", email);
+	}
+
+	public Member selectUserNo(int user_no) {
+		return session.selectOne("memberMapper.selectUserNo", user_no);
 	}
 
 }

@@ -92,110 +92,7 @@ img{
 }
 </style>
 
-<script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 
-<script type="text/javascript">
-function categoryChange(e){
-	var seoul = ["전체","강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
-	var busan = ['전체','강서구','금정구','남구','동구','동래구','부산진구','북구','사상구','사하구','서구','수영구','연제구','영도구','중구','해운대구','기장군'];
-	var daegu = ['전체','남구','달서구','동구','북구','서구','수성구','중구','달성군'];
-	var daejeon = ['전체','대덕구','동구','서구','유성구','중구'];
-	var gwangju = ['전체','광산구','남구','동구','북구','서구'];
-	var ulsan = ['전체','남구','동구','북구','중구','울주군'];
-	var incheon = ['전체','계양구','남구','남동구','동구','부평구','서구','연수구','중구','강화군','옹진군']
-	var gyeonggi = ['전체','고양시','과천시','광명시','구리시','군포시','남양주시','동두천시','부천시','성남시','수원시','시흥시','안산시','안양시','오산시','의왕시','의정부시','평택시','하남시','가평군','광주시','김포시','안성시','양주군','양평군','여주군','연천군','용인시','이천군','파주시','포천시','화성시'];
-	var gangwon = ['전체','강릉시','동해시','삼척시','속초시','원주시','춘천시','태백시','고성군','양구군','양양군','영월군','인제군','정선군','철원군','평창군','홍천군','화천군','황성군'];
-	var chungbuk = ['전체','제천시','청주시','충주시','괴산군','단양군','보은군','영동군','옥천군','음성군','진천군','청원군'];
-	var chungnam = ['전체','공주시','보령시','서산시','아산시','천안시','금산군','논산군','당진군','부여군','서천군','연기군','예산군','청양군','태안군','홍성군'];
-	var jeonbuk = ['전체','군산시','김제시','남원시','익산시','전주시','정읍시','고창군','무주군','부안군','순창군','완주군','임실군','장수군','진안군'];
-	var jeonnam = ['전체','광양시','나주시','목포시','순천시','여수시','여천시','강진군','고흥군','곡성군','구례군','담양군','무안군','보성군','신안군','여천군','영광군','영암군','완도군','장성군','장흥군','진도군','함평군','해남군','화순군'];
-	var gyeongbuk = ['전체','경산시','경주시','구미시','김천시','문경시','상주시','안동시','영주시','영천시','포항시','고령군','군위군','봉화군','성주군','영덕군','영양군','예천군','울릉군','울진군','의성군','청도군','청송군','칠곡군'];
-	var gyeongnam = ['전체','거제시','김해시','마산시','밀양시','사천시','울산시','진주시','진해시','창원시','통영시','거창군','고성군','남해군','산청군','양산시','의령군','창녕군','하동군','함안군','함양군','합천군'];
-	var jegu = ['전체','서귀포시','제주시','남제주군','북제주군'];
-	var target = document.getElementById("country");
-	
-	//console.log("e.value : "+e.value);
-	if(e.value == "서울") var a = seoul;
-	else if(e.value == "부산") var a = busan;
-	else if(e.value == "대구") var a = daegu;
-	else if(e.value == "대전") var a = daejeon;
-	else if(e.value == "광주") var a = gwangju;
-	else if(e.value == "울산") var a = ulsan;
-	else if(e.value == "인천") var a = incheon;
-	else if(e.value == "경기") var a = gyeonggi;
-	else if(e.value == "강원") var a = gangwon;
-	else if(e.value == "충북") var a = chungbuk;
-	else if(e.value == "충남") var a = chungnam;
-	else if(e.value == "전북") var a = jeonbuk;
-	else if(e.value == "전남") var a = jeonnam;
-	else if(e.value == "경북") var a = gyeongbuk;
-	else if(e.value == "경남") var a = gyeongnam;
-	else if(e.value == "제주") var a = jegu;
-	
-	target.options.length = 0;
-	
-	for (x in a){
-		var opt = document.createElement("option");
-		opt.value = a[x];
-		opt.innerHTML = a[x];
-		target.appendChild(opt);
-	}
-}
-
-
-/* $(document).ready(function () { */
-$(function () {
-	console.log($.timepicker);
-	$('#stime').timepicker({
-		'timeFormat' : 'HH:mm',
-		'minTime' : '06:00',
-		'maxTime' : '23:30',
-		'scrollDefaultNow' : true
-	}).on('changeTime', function() { //stime 을 선택한 후 동작
-		var from_time = $("input[name='stime']").val(); //stime 값을 변수에 저장
-		$('#etime').timepicker('option', 'minTime', from_time);//etime의 mintime 지정
-
-		if ($('#etime').val() && $('#etime').val() < from_time) {
-			$('#etime').timepicker('setTime', from_time);
-			//etime을 먼저 선택한 경우 그리고 etime시간이 stime시간보다 작은경우 etime시간 변경
-		}
-	});
-
-	$('#etime').timepicker({
-		'timeFormat' : 'HH:mm',
-		'minTime' : '06:00',
-		'maxTime' : '23:30'
-	});//etime 시간 기본 설정
-});
-
-function validate() {
-	//유효성 검사 코드 작성함
-	//서버 컨트롤러로 전송할 값들이 요구한 조건을 모두 만족하였는지 검사함
-
-	//암호와 암호 확인이 일치하지 않는지 확인함
-	var pwdValue = document.getElementById("userpwd").value;
-	var pwdValue2 = document.getElementById("userpwd2").value;
-
-	if (pwdValue !== pwdValue2) {
-		alert("암호와 암호 확인의 값이 일치하지 않습니다.");
-		document.getElementById("userpwd").select();
-		return false; //전송 취소함
-	}
-
-	return true; //전송함
-}
-
-function deleteuser(){
-	if(confirm("회원탈퇴를 계속 진행하시겠습니까?")== true){
-		location.href="deleteUser.do?user_id=${member.user_id}";	
-	}else{
-		return;
-	}
-}
-
-</script>
 
 </head>
 
@@ -606,4 +503,108 @@ function deleteuser(){
 	<c:import url="/WEB-INF/views/common/footer.jsp" />
 
 </body>
+<script type="text/javascript" src="${pageContext.servletContext.contextPath }/resources/js/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
+
+<script type="text/javascript">
+function categoryChange(e){
+	var seoul = ["전체","강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
+	var busan = ['전체','강서구','금정구','남구','동구','동래구','부산진구','북구','사상구','사하구','서구','수영구','연제구','영도구','중구','해운대구','기장군'];
+	var daegu = ['전체','남구','달서구','동구','북구','서구','수성구','중구','달성군'];
+	var daejeon = ['전체','대덕구','동구','서구','유성구','중구'];
+	var gwangju = ['전체','광산구','남구','동구','북구','서구'];
+	var ulsan = ['전체','남구','동구','북구','중구','울주군'];
+	var incheon = ['전체','계양구','남구','남동구','동구','부평구','서구','연수구','중구','강화군','옹진군']
+	var gyeonggi = ['전체','고양시','과천시','광명시','구리시','군포시','남양주시','동두천시','부천시','성남시','수원시','시흥시','안산시','안양시','오산시','의왕시','의정부시','평택시','하남시','가평군','광주시','김포시','안성시','양주군','양평군','여주군','연천군','용인시','이천군','파주시','포천시','화성시'];
+	var gangwon = ['전체','강릉시','동해시','삼척시','속초시','원주시','춘천시','태백시','고성군','양구군','양양군','영월군','인제군','정선군','철원군','평창군','홍천군','화천군','황성군'];
+	var chungbuk = ['전체','제천시','청주시','충주시','괴산군','단양군','보은군','영동군','옥천군','음성군','진천군','청원군'];
+	var chungnam = ['전체','공주시','보령시','서산시','아산시','천안시','금산군','논산군','당진군','부여군','서천군','연기군','예산군','청양군','태안군','홍성군'];
+	var jeonbuk = ['전체','군산시','김제시','남원시','익산시','전주시','정읍시','고창군','무주군','부안군','순창군','완주군','임실군','장수군','진안군'];
+	var jeonnam = ['전체','광양시','나주시','목포시','순천시','여수시','여천시','강진군','고흥군','곡성군','구례군','담양군','무안군','보성군','신안군','여천군','영광군','영암군','완도군','장성군','장흥군','진도군','함평군','해남군','화순군'];
+	var gyeongbuk = ['전체','경산시','경주시','구미시','김천시','문경시','상주시','안동시','영주시','영천시','포항시','고령군','군위군','봉화군','성주군','영덕군','영양군','예천군','울릉군','울진군','의성군','청도군','청송군','칠곡군'];
+	var gyeongnam = ['전체','거제시','김해시','마산시','밀양시','사천시','울산시','진주시','진해시','창원시','통영시','거창군','고성군','남해군','산청군','양산시','의령군','창녕군','하동군','함안군','함양군','합천군'];
+	var jegu = ['전체','서귀포시','제주시','남제주군','북제주군'];
+	var target = document.getElementById("country");
+	
+	//console.log("e.value : "+e.value);
+	if(e.value == "서울") var a = seoul;
+	else if(e.value == "부산") var a = busan;
+	else if(e.value == "대구") var a = daegu;
+	else if(e.value == "대전") var a = daejeon;
+	else if(e.value == "광주") var a = gwangju;
+	else if(e.value == "울산") var a = ulsan;
+	else if(e.value == "인천") var a = incheon;
+	else if(e.value == "경기") var a = gyeonggi;
+	else if(e.value == "강원") var a = gangwon;
+	else if(e.value == "충북") var a = chungbuk;
+	else if(e.value == "충남") var a = chungnam;
+	else if(e.value == "전북") var a = jeonbuk;
+	else if(e.value == "전남") var a = jeonnam;
+	else if(e.value == "경북") var a = gyeongbuk;
+	else if(e.value == "경남") var a = gyeongnam;
+	else if(e.value == "제주") var a = jegu;
+	
+	target.options.length = 0;
+	
+	for (x in a){
+		var opt = document.createElement("option");
+		opt.value = a[x];
+		opt.innerHTML = a[x];
+		target.appendChild(opt);
+	}
+}
+
+
+/* $(document).ready(function () { */
+$(function () {
+	console.log($.timepicker);
+	$('#stime').timepicker({
+		'timeFormat' : 'HH:mm',
+		'minTime' : '06:00',
+		'maxTime' : '23:30',
+		'scrollDefaultNow' : true
+	}).on('changeTime', function() { //stime 을 선택한 후 동작
+		var from_time = $("input[name='stime']").val(); //stime 값을 변수에 저장
+		$('#etime').timepicker('option', 'minTime', from_time);//etime의 mintime 지정
+
+		if ($('#etime').val() && $('#etime').val() < from_time) {
+			$('#etime').timepicker('setTime', from_time);
+			//etime을 먼저 선택한 경우 그리고 etime시간이 stime시간보다 작은경우 etime시간 변경
+		}
+	});
+
+	$('#etime').timepicker({
+		'timeFormat' : 'HH:mm',
+		'minTime' : '06:00',
+		'maxTime' : '23:30'
+	});//etime 시간 기본 설정
+});
+
+function validate() {
+	//유효성 검사 코드 작성함
+	//서버 컨트롤러로 전송할 값들이 요구한 조건을 모두 만족하였는지 검사함
+
+	//암호와 암호 확인이 일치하지 않는지 확인함
+	var pwdValue = document.getElementById("userpwd").value;
+	var pwdValue2 = document.getElementById("userpwd2").value;
+
+	if (pwdValue !== pwdValue2) {
+		alert("암호와 암호 확인의 값이 일치하지 않습니다.");
+		document.getElementById("userpwd").select();
+		return false; //전송 취소함
+	}
+
+	return true; //전송함
+}
+
+function deleteuser(){
+	if(confirm("회원탈퇴를 계속 진행하시겠습니까?")== true){
+		location.href="deleteUser.do?user_id=${member.user_id}";	
+	}else{
+		return;
+	}
+}
+
+</script>
 </html>

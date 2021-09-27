@@ -1,7 +1,5 @@
 package com.tftsa.itys.mypage.model.vo;
 
-import com.tftsa.itys.member.model.vo.Member;
-
 public class MyLikes implements java.io.Serializable{
 	private static final long serialVersionUID = 117L;
 

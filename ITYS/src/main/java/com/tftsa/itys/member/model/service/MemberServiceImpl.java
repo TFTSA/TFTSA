@@ -26,8 +26,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int deleteUser(String user_id) {
-		return memberDao.deleteUser(user_id);
+	public int deleteUser(int user_no) {
+		return memberDao.deleteUser(user_no);
 	}
 
 	@Override
@@ -150,6 +150,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public Tutor selectTutor(int user_no) {
 		return memberDao.selectTutor(user_no);
+	}
+
+	@Override
+	public Member selectEmail(String email) {
+		return memberDao.selectEmail(email);
+	}
+
+	@Override
+	public Member selectUserNo(int user_no) {
+		return memberDao.selectUserNo(user_no);
 	}
 
 

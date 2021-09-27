@@ -28,17 +28,22 @@ public class NaverLoginBO {
 	/* 프로필 조회 API URL */
 	private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
 
+	String state;
+	
 	/* 네이버 아이디로 인증 URL 생성 Method */
 	public String getAuthorizationUrl(HttpSession session) {
-
-		/* 세션 유효성 검증을 위하여 난수를 생성 */
-		String state = generateRandomString();
-		/* 생성한 난수 값을 session에 저장 */
-		System.out.println("state : "+state);
-		System.out.println("session : "+session);
+		
+		if(state != getSession(session) || getSession(session)==null) {
+			/* 세션 유효성 검증을 위하여 난수를 생성 */
+			state = generateRandomString();
+		} /*
+			 * else if(getSession(session) == null) { state = generateRandomString(); }
+			 */
+		/* 생성한 난수 값을 session에 저장 */	
 		setSession(session, state);
 		System.out.println("state : "+state);
 		System.out.println("session : "+session);
+		System.out.println("getSession(session) : "+getSession(session));
 
 		/* Scribe에서 제공하는 인증 URL 생성 기능을 이용하여 네아로 인증 URL 생성 */
 		OAuth20Service oauthService = new ServiceBuilder().apiKey(CLIENT_ID).apiSecret(CLIENT_SECRET)
@@ -52,10 +57,10 @@ public class NaverLoginBO {
 	public OAuth2AccessToken getAccessToken(HttpSession session, String code, String state) throws IOException {
 		/* Callback으로 전달받은 세선검증용 난수값과 세션에 저장되어있는 값이 일치하는지 확인 */
 		String sessionState = getSession(session);
-		System.out.println("state : "+state);
-		System.out.println("session : "+session);
-		System.out.println("sessionState : "+sessionState);
-		System.out.println(StringUtils.pathEquals(sessionState, state));
+//		System.out.println("state : "+state);
+//		System.out.println("session : "+session);
+//		System.out.println("sessionState : "+sessionState);
+//		System.out.println(StringUtils.pathEquals(sessionState, state));
 		if (StringUtils.pathEquals(sessionState, state)) {
 			OAuth20Service oauthService = new ServiceBuilder().apiKey(CLIENT_ID).apiSecret(CLIENT_SECRET)
 					.callback(REDIRECT_URI).state(state).build(NaverLoginApi.instance());
